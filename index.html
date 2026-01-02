@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TastyMeal | Smart Cooking Assistant</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Tasty<span class="highlight">Meal</span>.</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#categories">Menu</a></li>
+                <li><a href="#fridge">My Fridge</a></li>
+                <li><a href="#recipes">Recipes</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search for recipes...">
+                <button id="searchBtn"><span class="icon">🔍</span></button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <p class="subtitle">Hungry? Don't Wait!</p>
+                <h1>Discover Delicious <span class="text-red">Meals</span> Today</h1>
+                <p class="description">Turn ingredients you already have into five-star meals. Explore thousands of
+                    recipes and start cooking now.</p>
+                <div class="hero-btns">
+                    <button id="randomBtn" class="btn btn-primary">🎲 Surprise Me</button>
+                    <button class="btn btn-outline"
+                        onclick="document.getElementById('recipes').scrollIntoView()">Explore Menu</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="circle-bg"></div>
+                <img src="img.png"
+                    alt="Delicious Food Plate">
+                <div class="floating-badge">
+                    <span>🔥</span> Best Meals
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features container">
+        <div class="feature-box">
+            <div class="f-icon">⚡</div>
+            <h3>Quick Recipes</h3>
+            <p>Ready in 30 minutes</p>
+        </div>
+        <div class="feature-box">
+            <div class="f-icon">♻️</div>
+            <h3>Reduce Waste</h3>
+            <p>Cook what you have</p>
+        </div>
+        <div class="feature-box">
+            <div class="f-icon">📱</div>
+            <h3>Easy Guides</h3>
+            <p>Step-by-step videos</p>
+        </div>
+    </section>
+
+    <section id="fridge" class="fridge-section">
+        <div class="container fridge-layout">
+            <div class="fridge-content">
+                <span class="tag">Smart Kitchen</span>
+                <h2>What's in your fridge?</h2>
+                <p>Select your <b>main ingredient</b> below, and we'll show you dishes where it's the star of the show:
+                </p>
+
+                <div class="ingredient-list" id="ingredientTags">
+                </div>
+            </div>
+            <div class="fridge-img">
+                <img src="https://purepng.com/public/uploads/large/purepng.com-vegetablespotatoonioncucumbercabbage-21529559385b083c.png"
+                    alt="Fresh Ingredients">
+            </div>
+        </div>
+    </section>
+
+    <section id="recipes" class="main-recipes container">
+
+        <div class="section-header">
+            <h3>Our Categories</h3>
+            <h2>Popular Selections</h2>
+        </div>
+
+        <div class="categories-wrapper" id="categories">
+            <button class="cat-btn active" data-cat="Chicken">Chicken</button>
+            <button class="cat-btn" data-cat="Beef">Beef</button>
+            <button class="cat-btn" data-cat="Pasta">Pasta</button>
+            <button class="cat-btn" data-cat="Seafood">Seafood</button>
+            <button class="cat-btn" data-cat="Vegan">Vegan</button>
+            <button class="cat-btn" data-cat="Dessert">Dessert</button>
+        </div>
+
+        <div class="section-header" style="margin-top: 20px;">
+            <h3 id="resultHeading" style="color: #666; font-size: 1.2rem;">Featured Recipes</h3>
+        </div>
+
+        <div id="mealsGrid" class="meals-grid">
+        </div>
+
+        <div id="scrollLoader" class="scroll-loader hidden">
+            <div class="spinner"></div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>What People Say</h2>
+            <div class="review-card">
+                <p>"This site saved my dinner! I had only chicken and rice, and found an amazing recipe in seconds."</p>
+                <div class="user">
+                    <span>⭐⭐⭐⭐⭐</span>
+                    <h4>Sarah J.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">Tasty<span class="highlight">Meal</span>.</div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <p>&copy; 2024 TastyMeal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle">Meal Name</h2>
+                <span class="modal-category" id="modalCategory">Category</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img id="modalImg" src="" alt="Meal">
+                    <div class="ingredients-box">
+                        <h3>Ingredients</h3>
+                        <ul id="modalIngredients"></ul>
+                    </div>
+                </div>
+                <div class="modal-right">
+                    <h3>Instructions</h3>
+                    <p id="modalInstructions">...</p>
+                    <div class="video-wrapper">
+                        <iframe id="modalVideo" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <a id="modalSource" href="#" target="_blank" class="btn btn-outline"
+                        style="margin-top:20px; display:inline-block">View Original Source</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
